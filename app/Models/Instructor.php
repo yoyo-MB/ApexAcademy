@@ -13,4 +13,7 @@ class Instructor extends Model
         'speciality',
         'pictureUrl',
     ];
+    public function courses(){
+        return $this->hasMany(Course::class,"instructorId","id");
+    }
 }

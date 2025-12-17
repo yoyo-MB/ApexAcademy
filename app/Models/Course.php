@@ -11,5 +11,10 @@ class Course extends Model
         'description',
         'duration',
         'price',
-    ];  
+        'instructorId',
+        'pictureUrl',
+    ]; 
+     public function instructor(){
+        return $this->belongsTo(Instructor::class,"instructorId","id");
+    } 
 }
