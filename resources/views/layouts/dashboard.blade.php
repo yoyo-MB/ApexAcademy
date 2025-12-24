@@ -93,6 +93,10 @@ main {
 
   <!-- Navigation -->
   <nav class="nav flex-column gap-2">
+    <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+      <i class="bi bi-speedometer2"></i>
+      Dashboard
+    </a>
     <a href="{{ route('instructor.index') }}" class="nav-link {{ request()->routeIs('instructor.*') ? 'active' : '' }}">
       <i class="bi bi-person-badge-fill"></i>
       Instructors
@@ -100,6 +104,10 @@ main {
     <a href="{{ route('course.index') }}" class="nav-link {{ request()->routeIs('course.*') ? 'active' : '' }}">
       <i class="bi bi-book-fill"></i>
       Courses
+    </a>
+    <a href="{{ route('course_registrations.index') }}" class="nav-link {{ request()->routeIs('course_registrations.*') ? 'active' : '' }}">
+      <i class="bi bi-person-plus-fill"></i>
+      Course Registrations
     </a>
   </nav>
 </aside>
