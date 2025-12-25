@@ -109,6 +109,14 @@ main {
       <i class="bi bi-person-plus-fill"></i>
       Course Registrations
     </a>
+    <hr class="my-3">
+    <a href="{{ route('logout') }}" class="nav-link text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+      <i class="bi bi-box-arrow-right"></i>
+      Logout
+    </a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+      @csrf
+    </form>
   </nav>
 </aside>
 

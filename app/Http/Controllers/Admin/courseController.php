@@ -25,8 +25,9 @@ class courseController extends Controller
      */
     public function create()
     {
-        $courses = Course::all();
-        return view('Admin.course.create', compact('courses'));
+        $instructors = Instructor::all();
+        
+        return view('Admin.course.create', compact('instructors'));
     }
 
     /**
@@ -42,15 +43,18 @@ class courseController extends Controller
             'instructorId' => 'required|exists:instructors,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg',
         ]);
+        
         $input = $request->except(['image']);
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imagePath = $image->store('instructors', 'public');
             $input['pictureUrl'] = Storage::url($imagePath);
+        } else {
+            
+            $input['pictureUrl'] = 'https://via.placeholder.com/300x200/478AB1/FFFFFF?text=Course';
         }
-
+       
         Course::create($input);
-
         return redirect()->route('course.index')->with('success', 'Course created successfully.');
     }
 

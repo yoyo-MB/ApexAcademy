@@ -4,16 +4,26 @@ use App\Http\Controllers\Admin\courseController;
 use App\Http\Controllers\Admin\instructorController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\courseregistrationController;
+use App\Http\Controllers\authController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    $courses = \App\Models\Course::with('instructor')->get();
+    return view('home', compact('courses'));
+})->name('home');
 
 Route::get('/admin', function () {
     return redirect()->route('admin.dashboard');
 });
-//Route::middleware(['web'])->group(function () {
+
+// Authentication routes
+Route::get('login', [authController::class, 'showLogin'])->name('login');
+Route::post('login', [authController::class, 'login']);
+Route::get('register', [authController::class, 'registerForm'])->name('register');
+Route::post('register', [authController::class, 'register']);
+
+Route::middleware(['web', 'auth'])->group(function () {
+    Route::post('logout', [authController::class, 'logout'])->name('logout');
     Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     
     Route::resource('instructor', instructorController::class)->names([
@@ -39,10 +49,8 @@ Route::get('/admin', function () {
     // Course registration management routes
     Route::get('course-registrations', [courseregistrationController::class, 'index'])->name('course_registrations.index');
     Route::get('course-registrations/{id}', [courseregistrationController::class, 'show'])->name('course_registrations.show');
-    Route::get('course-registrations/{id}/edit', [courseregistrationController::class, 'edit'])->name('course_registrations.edit');
-    Route::put('course-registrations/{id}', [courseregistrationController::class, 'update'])->name('course_registrations.update');
     Route::delete('course-registrations/{id}', [courseregistrationController::class, 'destroy'])->name('course_registrations.destroy');
-//});
+});
 
 
 // Public course registration routes (no authentication required)

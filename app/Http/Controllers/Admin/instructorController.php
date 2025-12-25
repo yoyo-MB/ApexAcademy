@@ -23,6 +23,7 @@ class instructorController extends Controller
      */
     public function create()
     {
+
         return view("Admin.Instructor.create"); 
     }
 
@@ -31,6 +32,8 @@ class instructorController extends Controller
      */
     public function store(Request $request)
     {
+       
+        
         $request->validate([
             'name' => 'required|string|max:255',
             'bio' => 'required|string',
@@ -38,6 +41,7 @@ class instructorController extends Controller
             'speciality' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg',
         ]);
+        
         $input = $request->except(['image']);
         if ($request->hasFile('image')) {
             $image = $request->file('image');

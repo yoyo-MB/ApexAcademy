@@ -1,87 +1,109 @@
 @extends('layouts.dashboard')
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
-    <div class="max-w-4xl mx-auto">
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900">Course Registration Details</h1>
-        </div>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">Course Registration Details</h2>
+    <a href="{{ route('course_registrations.index') }}" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left me-2"></i>Back to List
+    </a>
+</div>
 
-        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-            <div class="px-4 py-5 sm:px-6">
-                <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    Registration Information
-                </h3>
-                <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                    Personal details and course information for this registration.
-                </p>
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-user me-2"></i>Student Information</h5>
             </div>
-            <div class="border-t border-gray-200">
-                <dl>
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">Full Name</dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ $course_registration->first_name }} {{ $course_registration->last_name }}
-                        </dd>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 text-center mb-3">
+                        <div class="avatar-circle bg-primary text-white d-flex align-items-center justify-content-center rounded-circle mx-auto mb-3" style="width: 80px; height: 80px; font-weight: 600; font-size: 2rem;">
+                            {{ strtoupper(substr($course_registration->first_name, 0, 1)) }}{{ strtoupper(substr($course_registration->last_name, 0, 1)) }}
+                        </div>
+                        <h6 class="fw-bold">Registration #{{ $course_registration->id }}</h6>
                     </div>
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">Email Address</dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ $course_registration->email }}
-                        </dd>
+                    <div class="col-md-8">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td class="fw-semibold text-muted" width="120">Full Name:</td>
+                                <td>{{ $course_registration->first_name }} {{ $course_registration->last_name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-semibold text-muted">Email:</td>
+                                <td><i class="fas fa-envelope text-muted me-2"></i>{{ $course_registration->email }}</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-semibold text-muted">Phone:</td>
+                                <td><i class="fas fa-phone text-muted me-2"></i>{{ $course_registration->phone_number }}</td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">Phone Number</dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ $course_registration->phone_number }}
-                        </dd>
-                    </div>
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">Course</dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            @if($course_registration->course)
-                                {{ $course_registration->course->title }}
-                            @else
-                                <span class="text-gray-400">Course not found</span>
-                            @endif
-                        </dd>
-                    </div>
-                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">Registration Date</dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ $course_registration->created_at->format('F j, Y g:i A') }}
-                        </dd>
-                    </div>
-                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">Last Updated</dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ $course_registration->updated_at->format('F j, Y g:i A') }}
-                        </dd>
-                    </div>
-                </dl>
+                </div>
             </div>
         </div>
 
-        <div class="mt-6 flex justify-between">
-            <div class="space-x-3">
-                <a href="{{ route('course_registrations.edit', $course_registration->id) }}" 
-                   class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    Edit Registration
-                </a>
-                <a href="{{ route('course_registrations.index') }}" 
-                   class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    Back to List
-                </a>
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="fas fa-book me-2"></i>Course Information</h5>
             </div>
-            
-            <form action="{{ route('course_registrations.destroy', $course_registration->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this registration?');">
-                @csrf
-                @method('DELETE')
-                <button type="submit" 
-                        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                    Delete Registration
-                </button>
-            </form>
+            <div class="card-body">
+                @if($course_registration->course)
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6 class="fw-bold text-primary">{{ $course_registration->course->title }}</h6>
+                            <p class="text-muted">{{ Str::limit($course_registration->course->description, 150) }}</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <small class="text-muted"><i class="fas fa-clock me-1"></i> Duration: {{ $course_registration->course->duration }} hours</small>
+                                </div>
+                                <div class="col-md-6">
+                                    <small class="text-muted"><i class="fas fa-dollar-sign me-1"></i> Price: ${{ $course_registration->course->price }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Course information not available
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Registration Details</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <small class="text-muted d-block">Registration Date</small>
+                    <strong>{{ $course_registration->created_at->format('F j, Y') }}</strong>
+                    <br><small class="text-muted">{{ $course_registration->created_at->format('g:i A') }}</small>
+                </div>
+                <div class="mb-3">
+                    <small class="text-muted d-block">Last Updated</small>
+                    <strong>{{ $course_registration->updated_at->format('F j, Y') }}</strong>
+                    <br><small class="text-muted">{{ $course_registration->updated_at->format('g:i A') }}</small>
+                </div>
+                <hr>
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Registration Record</strong><br>
+                    <small>This is a permanent record of the student's registration. Personal information cannot be edited to maintain data integrity.</small>
+                </div>
+                <div class="d-grid">
+                    <form action="{{ route('course_registrations.destroy', $course_registration->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this registration?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-outline-danger">
+                            <i class="fas fa-trash me-2"></i>Delete Registration
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
