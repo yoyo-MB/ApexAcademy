@@ -14,11 +14,25 @@ class courseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $courses = Course::with('instructor')->get();
-        return view('Admin.course.index', compact('courses'));
+        $q = $request->query('q'); // search keyword
+
+        $courses = Course::query()
+            ->with('instructor') // avoid N+1 (Course->instructor relation)
+            ->when($q, function ($query) use ($q) {
+                $query->where('title', 'like', "%{$q}%")
+                    ->orWhereHas('instructor', function ($sub) use ($q) {
+                        $sub->where('name', 'like', "%{$q}%");
+                    });
+            })
+            ->latest()
+            ->paginate(10)
+            ->appends(['q' => $q]); // keeps q in pagination links
+
+        return view('Admin.course.index', compact('courses', 'q'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -40,7 +54,7 @@ class courseController extends Controller
             'duration' => 'required|integer|min:1',
             'price' => 'required|numeric|min:0',
             'instructorId' => 'required|exists:instructors,id',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg',
+            'image' => 'required|image|mimes:jpeg,png,jpg',
         ]);
         $input = $request->except(['image']);
         if ($request->hasFile('image')) {
@@ -82,7 +96,7 @@ class courseController extends Controller
             'duration' => 'required|integer|min:1',
             'price' => 'required|numeric|min:0',
             'instructorId' => 'required|exists:instructors,id',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg',
+            'image' => 'required|image|mimes:jpeg,png,jpg',
         ]);
         $input = $request->except(['image']);
         if ($request->hasFile('image')) {

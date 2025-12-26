@@ -7,6 +7,14 @@
 <a href="{{ route('instructor.create') }}" class="btn btn-primary">+ Add Instructor</a>
 </div>
 
+<form method="GET" action="{{ route('instructor.index') }}" class="mb-3">
+	<div class="input-group">
+		<input type="text" name="q" class="form-control" placeholder="Search instructors or courses" value="{{ $q ?? '' }}">
+		<button class="btn btn-outline-secondary" type="submit">Search</button>
+		<a href="{{ route('instructor.index') }}" class="btn btn-outline-secondary">Clear</a>
+	</div>
+</form>
+
 
 <div class="row">
 @foreach($instructors as $instructor)
@@ -24,5 +32,8 @@
 </div>
 </div>
 @endforeach
+</div>
+<div class="mt-4">
+	{{ $instructors->links() }}
 </div>
 @endsection
