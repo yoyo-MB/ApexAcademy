@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->integer('duration'); 
-            $table->float('price'); 
+            $table->float('price');
+            $table->integer('instructorId');
+            $table->string('pictureUrl'); 
             $table->timestamps();
         });
     }
