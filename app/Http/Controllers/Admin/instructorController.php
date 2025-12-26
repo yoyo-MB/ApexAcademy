@@ -13,11 +13,25 @@ class instructorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $instructors=Instructor::all();
-        return view("Admin.Instructor.index",compact("instructors"));
+        $q = $request->query('q');
+
+        $instructors = Instructor::query()
+            ->with('courses')
+            ->when($q, function ($query) use ($q) {
+                $query->where('name', 'like', "%{$q}%")
+                    ->orWhereHas('courses', function ($sub) use ($q) {
+                        $sub->where('title', 'like', "%{$q}%");
+                    });
+            })
+            ->latest()
+            ->paginate(10)
+            ->appends(['q' => $q]);
+
+        return view('Admin.Instructor.index', compact('instructors', 'q'));
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -39,9 +53,9 @@ class instructorController extends Controller
             'bio' => 'required|string',
             'yearsOfExperience' => 'required|integer|min:0',
             'speciality' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg',
+            'image' => 'required|image|mimes:jpeg,png,jpg',
         ]);
-        
+
         $input = $request->except(['image']);
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -81,7 +95,7 @@ class instructorController extends Controller
             'bio' => 'required|string',
             'yearsOfExperience' => 'required|integer|min:0',
             'speciality' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg',
+            'image' => 'required|image|mimes:jpeg,png,jpg',
         ]);
         $input = $request->except(['image']);
         if ($request->hasFile('image')) {
