@@ -13,11 +13,12 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/admin', function () {
-    return redirect()->route('admin.dashboard');
+    return redirect()->route('admin.login');
 });
 
 // Authentication routes
 Route::get('login', [authController::class, 'showLogin'])->name('login');
+Route::get('adminlogin', [authController::class, 'showLogin'])->name('admin.login');
 Route::post('login', [authController::class, 'login']);
 Route::get('register', [authController::class, 'registerForm'])->name('register');
 Route::post('register', [authController::class, 'register']);

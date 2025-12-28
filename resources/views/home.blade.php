@@ -185,9 +185,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#courses">Courses</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin">Admin Portal</a>
-                    </li>
                 </ul>
             </div>
         </div>
