@@ -8,6 +8,7 @@ use App\Models\Instructor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\In;
+   use Illuminate\Support\Str;
 
 class courseController extends Controller
 {
@@ -67,6 +68,11 @@ class courseController extends Controller
             
             $input['pictureUrl'] = 'https://via.placeholder.com/300x200/478AB1/FFFFFF?text=Course';
         }
+     
+
+
+        $input['slug'] = Str::slug($request->title);
+
        
         Course::create($input);
         return redirect()->route('course.index')->with('success', 'Course created successfully.');
@@ -111,6 +117,8 @@ class courseController extends Controller
             $imagePath = $image->store('courses', 'public');
             $input['pictureUrl'] = Storage::url($imagePath);
         }
+        $input['slug'] = Str::slug($request->title);
+
 
         $course->update($input);
 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->float('price');
             $table->integer('instructorId');
             $table->string('pictureUrl'); 
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

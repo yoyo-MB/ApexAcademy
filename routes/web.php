@@ -5,12 +5,41 @@ use App\Http\Controllers\Admin\instructorController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\courseregistrationController;
 use App\Http\Controllers\authController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\homeController;
+use App\Models\Course;
+use App\Models\Instructor;
+use Illuminate\Support\Facades\Route; 
 
 Route::get('/', function () {
-    $courses = \App\Models\Course::with('instructor')->get();
-    return view('home', compact('courses'));
+    $homeCourses = Course::latest()->take(3)->get();
+    return view('home', compact('homeCourses'));
 })->name('home');
+
+Route::view('/about', 'about')->name('about');
+Route::get('/courses', function () {
+    $courses = Course::latest()->get();
+    return view('courses', compact('courses'));
+})->name('courses');
+
+// Public course detail page by slug
+Route::get('/courses/{slug}', function ($slug) {
+    $course = Course::where('slug', $slug)->firstOrFail();
+    return view('courses.show', compact('course'));
+})->name('courses.show');
+
+// Instructors index (public)
+Route::get('/instructors', function () {
+    $instructors = Instructor::all();
+    return view('instructors', compact('instructors'));
+})->name('instructors');
+
+Route::get('/instructors/{instructor}', function (Instructor $instructor) {
+    return view('instructors.show', compact('instructor'));
+})->name('instructors.show');
+
+Route::view('/contact', 'contact')->name('contact');
+
+
 
 Route::get('/admin', function () {
     return redirect()->route('admin.login');
