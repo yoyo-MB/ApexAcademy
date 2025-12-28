@@ -23,11 +23,16 @@
 @if($instructor->pictureUrl)
 <img src="{{ $instructor->pictureUrl }}" class="card-img-top" style="height:220px;object-fit:cover">
 @endif
-<div class="card-body">
+	<div class="card-body">
 <h5>{{ $instructor->name }}</h5>
 <p class="text-muted">{{ $instructor->speciality }}</p>
 <a href="{{ route('instructor.show',$instructor->id) }}" class="btn btn-sm btn-outline-primary">Details</a>
 <a href="{{ route('instructor.edit',$instructor->id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+<form action="{{ route('instructor.destroy', $instructor->id) }}" method="POST" style="display:inline-block" onsubmit="return confirm('Are you sure you want to delete this instructor?');">
+	@csrf
+	@method('DELETE')
+	<button class="btn btn-sm btn-outline-danger">Delete</button>
+</form>
 </div>
 </div>
 </div>

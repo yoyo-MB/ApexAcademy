@@ -22,7 +22,7 @@ Route::post('login', [authController::class, 'login']);
 Route::get('register', [authController::class, 'registerForm'])->name('register');
 Route::post('register', [authController::class, 'register']);
 
-Route::middleware(['web', 'auth'])->group(function () {
+Route::middleware(['web', 'auth:admin'])->group(function () {
     Route::post('logout', [authController::class, 'logout'])->name('logout');
     Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     
@@ -33,7 +33,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         'edit'=>'instructor.edit',
         'store'=>'instructor.store',
         'update'=>'instructor.update',
-        'destory'=>'instructor.destory',
+        'destroy'=>'instructor.destroy',
     ]);
 
     Route::resource('course', courseController::class)->names([

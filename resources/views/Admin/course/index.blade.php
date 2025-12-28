@@ -21,7 +21,10 @@
 <div class="col-lg-4 col-md-6 mb-4">
 <div class="card h-100">
 @if($course->pictureUrl)
-<img src="{{ asset($course->pictureUrl) }}" class="card-img-top" style="height:200px;object-fit:cover">
+@php
+	$courseImage = (\Illuminate\Support\Str::startsWith($course->pictureUrl, ['http://', 'https://'])) ? $course->pictureUrl : asset($course->pictureUrl);
+@endphp
+<img src="{{ $courseImage }}" class="card-img-top" style="height:200px;object-fit:cover">
 @endif
 <div class="card-body">
 <h5 class="card-title">{{ $course->title }}</h5>
@@ -31,6 +34,11 @@
 <div class="card-footer bg-transparent border-0 d-flex gap-2">
 <a href="{{ route('course.show',$course->id) }}" class="btn btn-outline-primary btn-sm">Details</a>
 <a href="{{ route('course.edit',$course->id) }}" class="btn btn-outline-secondary btn-sm">Edit</a>
+<form action="{{ route('course.destroy', $course->id) }}" method="POST" onsubmit="return confirm('Delete this course?');" style="display:inline-block">
+	@csrf
+	@method('DELETE')
+	<button class="btn btn-outline-danger btn-sm">Delete</button>
+</form>
 </div>
 </div>
 </div>

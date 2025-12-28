@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use Hash;
+use App\Models\Admin;
+use Illuminate\Support\Facades\Hash;
 
 class authController extends Controller
 {
@@ -20,16 +21,29 @@ class authController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-        $user=User::where('email',$credentials['email'])->first();
-        if($user && Hash::check($credentials['password'],$user->password)){
-         Auth::guard('web')->login($user);
-         return redirect()->route('admin.dashboard');}
+        // Try admin login first
+        $admin = Admin::where('email', $credentials['email'])->first();
+        if ($admin && Hash::check($credentials['password'], $admin->password)) {
+            Auth::guard('admin')->login($admin);
+            return redirect()->route('admin.dashboard');
+        }
+
+        // Fallback to normal user
+        $user = User::where('email', $credentials['email'])->first();
+        if ($user && Hash::check($credentials['password'], $user->password)) {
+            Auth::guard('web')->login($user);
+            return redirect()->route('admin.dashboard');
+        }
          return back()->with('error','Invalid credentials');
     }
     public function logout(Request $request)
     {
-        
-        Auth::guard('web')->logout();
+        // Logout from whichever guard is authenticated
+        if (Auth::guard('admin')->check()) {
+            Auth::guard('admin')->logout();
+        } elseif (Auth::guard('web')->check()) {
+            Auth::guard('web')->logout();
+        }
         $request->session()->invalidate();
         $request->session()->regenerate();
         return redirect()->route('login');

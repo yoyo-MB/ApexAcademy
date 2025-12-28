@@ -54,6 +54,13 @@
 </div>
 
 
-<button class="btn btn-primary mt-4">Update Course</button>
+<div class="d-flex gap-2 mt-4">
+	<button class="btn btn-primary">Update Course</button>
+	<form action="{{ route('course.destroy', $course->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this course?');">
+		@csrf
+		@method('DELETE')
+		<button type="submit" class="btn btn-danger">Delete Course</button>
+	</form>
+</div>
 </form>
 @endsection

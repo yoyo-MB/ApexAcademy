@@ -6,7 +6,10 @@
 <div class="row g-4">
 <div class="col-md-5">
 @if($course->pictureUrl)
-<img src="{{ asset($course->pictureUrl) }}" class="img-fluid rounded">
+@php
+	$courseImage = (\Illuminate\Support\Str::startsWith($course->pictureUrl, ['http://', 'https://'])) ? $course->pictureUrl : asset($course->pictureUrl);
+@endphp
+<img src="{{ $courseImage }}" class="img-fluid rounded">
 @endif
 </div>
 <div class="col-md-7">
