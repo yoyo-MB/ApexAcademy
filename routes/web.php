@@ -21,9 +21,8 @@ Route::get('/courses', function () {
     return view('courses', compact('courses'));
 })->name('courses');
 
-// Public course detail page by slug
-Route::get('/courses/{slug}', function ($slug) {
-    $course = Course::where('slug', $slug)->firstOrFail();
+// Public course detail page (accepts slug or numeric id)
+Route::get('/courses/{course}', function (Course $course) {
     return view('courses.show', compact('course'));
 })->name('courses.show');
 

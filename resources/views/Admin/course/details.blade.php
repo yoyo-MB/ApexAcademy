@@ -14,7 +14,7 @@
 </div>
 <div class="col-md-7">
 <h2 class="fw-bold">{{ $course->title }}</h2>
-<p class="text-muted">Instructor: {{ $course->instructor->name }}</p>
+<p class="text-muted">Instructor: {{ $course->instructor->name ?? '—' }}</p>
 
 
 <p>{{ $course->description }}</p>

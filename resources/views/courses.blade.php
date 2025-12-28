@@ -53,11 +53,15 @@
                             </h3>
 
                             <div class="doctor-name">
-                                د . {{ $course->instructor->name }}
+                                @if($course->instructor)
+                                    د . {{ $course->instructor->name }}
+                                @else
+                                    د . —
+                                @endif
                             </div>
 
-                            <a href="{{ route('courses.show', $course->slug) }}"
-                               class="btn btn-sm btn-primary mt-2">
+                                     <a href="{{ route('courses.show', $course->slug ?? $course->id) }}"
+                                         class="btn btn-sm btn-primary mt-2">
                                 عرض التفاصيل
                             </a>
                         </div>

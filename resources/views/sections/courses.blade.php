@@ -16,7 +16,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-6">
                     <div class="course-card">
                         <div class="course-thumbnail">
-                            <a href="{{ route('courses.show', $course->slug) }}">
+                            <a href="{{ route('courses.show', $course->slug ?? $course->id) }}">
                                 <img
                                     src="{{ $course->pictureUrl }}"
                                     class="img-fluid"

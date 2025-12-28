@@ -50,26 +50,28 @@
                     </div>
 
                     <!-- Instructor -->
-                    <div class="course-single-meta">
-    <a 
-        href="{{ route('instructors.show', $course->instructor->id) }}" 
-        class="course-author d-flex align-items-center"
-    >
-        <img
-            src="{{ $course->instructor->pictureUrl }}"
-            alt="{{ $course->instructor->name }}"
-            style="
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                object-fit: cover;
-                margin-left: 10px;
-            "
-        >
+                    @if ($course->instructor)
+                        <div class="course-single-meta">
+                            <a 
+                                href="{{ route('instructors.show', $course->instructor->id) }}" 
+                                class="course-author d-flex align-items-center"
+                            >
+                                <img
+                                    src="{{ $course->instructor->pictureUrl }}"
+                                    alt="{{ $course->instructor->name }}"
+                                    style="
+                                        width: 50px;
+                                        height: 50px;
+                                        border-radius: 50%;
+                                        object-fit: cover;
+                                        margin-left: 10px;
+                                    "
+                                >
 
-        <strong>{{ $course->instructor->name }}</strong>
-    </a>
-</div>
+                                <strong>{{ $course->instructor->name }}</strong>
+                            </a>
+                        </div>
+                    @endif
 
 
                 </div>
