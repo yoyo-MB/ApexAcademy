@@ -38,6 +38,23 @@ Route::get('/instructors/{instructor}', function (Instructor $instructor) {
 
 Route::view('/contact', 'contact')->name('contact');
 
+// Handle contact form submission
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+Route::post('contact', function (Request $request) {
+    $data = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'subject' => 'nullable|string|max:255',
+        'message' => 'required|string',
+    ]);
+
+    // Log the message for now (or replace with Mail::send / store in DB)
+    Log::info('Contact form submitted', $data);
+
+    return redirect()->route('contact')->with('success', 'رسالتك أرسلت بنجاح. شكرا لكم!');
+})->name('contact.submit');
+
 
 
 Route::get('/admin', function () {

@@ -83,13 +83,13 @@
             <!-- Left side -->
             <div class="contact-left">
                 <div class="contact-form">
-                    <form action="#" method="POST">
+                    <form action="{{ route('contact.submit') }}" method="POST">
                         @csrf
 
-                        <input type="text" class="form-control" placeholder="الإسم">
-                        <input type="email" class="form-control" placeholder="البريد الإلكتروني">
-                        <input type="text" class="form-control" placeholder="الموضوع">
-                        <textarea rows="4" class="form-control" placeholder="اكتب رسالتك"></textarea>
+                        <input type="text" name="name" class="form-control" placeholder="الإسم">
+                        <input type="email" name="email" class="form-control" placeholder="البريد الإلكتروني">
+                        <input type="text" name="subject" class="form-control" placeholder="الموضوع">
+                        <textarea name="message" rows="4" class="form-control" placeholder="اكتب رسالتك"></textarea>
 
                         <div class="submit-btn">
                             <button type="submit" class="btn">ارسل الآن</button>
