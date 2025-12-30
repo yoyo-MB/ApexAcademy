@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\CourseRegistrations;
 use Illuminate\Http\Request;
+use NoCaptcha;
 
 class courseregistrationController extends Controller
 {
@@ -37,6 +38,7 @@ $courses = \App\Models\Course::all();
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone_number' => 'required|string|max:20',
+            'g-recaptcha-response' => 'required|captcha'
         ]);
 
         CourseRegistrations::create($validated);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Contact_us;
 use Illuminate\Http\Request;
+use NoCaptcha;
 
 class Contact_us_controller extends Controller
 {
@@ -27,6 +28,7 @@ class Contact_us_controller extends Controller
             'email' => 'required|email|max:255',
             'subject' => 'required|string|max:255',
             'message' => 'required|string',
+            'g-recaptcha-response' => 'required|captcha'
         ]);
 
         Contact_us::create($validated);

@@ -1,0 +1,7 @@
+# Add these lines to your .env file:
+
+# Google reCAPTCHA
+NOCAPTCHA_SITEKEY=your_site_key_here
+NOCAPTCHA_SECRET=your_secret_key_here
+
+# Get your keys from: https://www.google.com/recaptcha/admin/create

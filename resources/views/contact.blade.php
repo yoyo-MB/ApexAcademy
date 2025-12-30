@@ -105,6 +105,12 @@
                         <input type="email" name="email" class="form-control" placeholder="البريد الإلكتروني" value="{{ old('email') }}" required>
                         <input type="text" name="subject" class="form-control" placeholder="الموضوع" value="{{ old('subject') }}" required>
                         <textarea name="message" rows="4" class="form-control" placeholder="اكتب رسالتك" required>{{ old('message') }}</textarea>
+                        
+                        @if(config('no-captcha.sitekey'))
+                            <div class="mb-3">
+                                {!! NoCaptcha::display() !!}
+                            </div>
+                        @endif
 
                         <div class="submit-btn">
                             <button type="submit" class="btn">ارسل الآن</button>

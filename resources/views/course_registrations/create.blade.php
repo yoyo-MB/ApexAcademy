@@ -125,6 +125,12 @@
                     <input type="text" name="phone_number" class="form-control" required>
                 </div>
 
+                @if(config('no-captcha.sitekey'))
+                    <div class="mb-4">
+                        {!! NoCaptcha::display() !!}
+                    </div>
+                @endif
+
                 <div class="d-flex justify-content-between">
                     <a href="{{ url()->previous() }}" class="btn btn-outline-secondary">
                         رجوع
