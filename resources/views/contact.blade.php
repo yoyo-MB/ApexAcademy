@@ -83,13 +83,28 @@
             <!-- Left side -->
             <div class="contact-left">
                 <div class="contact-form">
-                    <form action="#" method="POST">
+                    <form action="{{ route('contact.store') }}" method="POST">
                         @csrf
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
 
-                        <input type="text" class="form-control" placeholder="الإسم">
-                        <input type="email" class="form-control" placeholder="البريد الإلكتروني">
-                        <input type="text" class="form-control" placeholder="الموضوع">
-                        <textarea rows="4" class="form-control" placeholder="اكتب رسالتك"></textarea>
+                        @if(session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        <input type="text" name="name" class="form-control" placeholder="الإسم" value="{{ old('name') }}" required>
+                        <input type="email" name="email" class="form-control" placeholder="البريد الإلكتروني" value="{{ old('email') }}" required>
+                        <input type="text" name="subject" class="form-control" placeholder="الموضوع" value="{{ old('subject') }}" required>
+                        <textarea name="message" rows="4" class="form-control" placeholder="اكتب رسالتك" required>{{ old('message') }}</textarea>
 
                         <div class="submit-btn">
                             <button type="submit" class="btn">ارسل الآن</button>

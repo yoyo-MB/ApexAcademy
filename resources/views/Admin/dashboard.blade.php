@@ -12,7 +12,7 @@
 
     <!-- Statistics Cards -->
     <div class="row mb-4">
-        <div class="col-md-4 mb-3">
+        <div class="col-md-3 mb-3">
             <div class="card border-0 shadow-sm">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="col-md-4 mb-3">
+        <div class="col-md-3 mb-3">
             <div class="card border-0 shadow-sm">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <div class="col-md-4 mb-3">
+        <div class="col-md-3 mb-3">
             <div class="card border-0 shadow-sm">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -60,6 +60,24 @@
                         <div class="flex-grow-1 ms-3">
                             <h6 class="text-muted mb-1">Total Registrations</h6>
                             <h3 class="mb-0">{{ $stats['total_registrations'] }}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="rounded-circle bg-warning bg-opacity-10 p-3">
+                                <i class="bi bi-envelope-fill text-warning fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="text-muted mb-1">Contact Messages</h6>
+                            <h3 class="mb-0">{{ $stats['total_contact_messages'] }}</h3>
                         </div>
                     </div>
                 </div>
@@ -121,6 +139,63 @@
                     <i class="bi bi-person-plus text-muted fs-1 mb-3"></i>
                     <h6 class="text-muted">No course registrations yet</h6>
                     <p class="text-muted small">Students can register for courses through the public registration form.</p>
+                </div>
+            @endif
+        </div>
+    </div>
+
+    <!-- Recent Contact Messages -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white border-0">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Recent Contact Messages</h5>
+                <a href="{{ route('contact_us.index') }}" class="btn btn-sm btn-outline-warning">
+                    View All <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            @if($stats['recent_contact_messages']->count() > 0)
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Subject</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($stats['recent_contact_messages'] as $message)
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="rounded-circle bg-light text-warning d-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px; font-size: 12px; font-weight: 600;">
+                                                {{ strtoupper(substr($message->name, 0, 1)) }}
+                                            </div>
+                                            {{ $message->name }}
+                                        </div>
+                                    </td>
+                                    <td>{{ $message->email }}</td>
+                                    <td>
+                                        <span class="text-truncate d-block" style="max-width: 200px;">
+                                            {{ Str::limit($message->subject, 30) }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <small class="text-muted">{{ $message->created_at->format('M j, Y') }}</small>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                <div class="text-center py-5">
+                    <i class="bi bi-envelope text-muted fs-1 mb-3"></i>
+                    <h6 class="text-muted">No contact messages yet</h6>
+                    <p class="text-muted small">Users can contact you through the contact form.</p>
                 </div>
             @endif
         </div>

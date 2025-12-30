@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\courseController;
 use App\Http\Controllers\Admin\instructorController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\Contact_us_controller;
 use App\Http\Controllers\courseregistrationController;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\homeController;
@@ -44,7 +45,8 @@ Route::get('/instructors/{instructor}', function (Instructor $instructor) {
     return view('instructors.show', compact('instructor'));
 })->name('instructors.show');
 
-Route::view('/contact', 'contact')->name('contact');
+Route::get('/contact', [Contact_us_controller::class, 'create'])->name('contact');
+Route::post('/contact', [Contact_us_controller::class, 'store'])->name('contact.store');
 
 
 
@@ -86,6 +88,10 @@ Route::middleware(['web', 'auth:admin'])->group(function () {
     Route::get('course-registrations', [courseregistrationController::class, 'index'])->name('course_registrations.index');
     Route::get('course-registrations/{id}', [courseregistrationController::class, 'show'])->name('course_registrations.show');
     Route::delete('course-registrations/{id}', [courseregistrationController::class, 'destroy'])->name('course_registrations.destroy');
+
+    // Contact us management routes
+    Route::get('contact-us', [Contact_us_controller::class, 'index'])->name('contact_us.index');
+    Route::get('contact-us/{id}', [Contact_us_controller::class, 'show'])->name('contact_us.show');
 });
 
 
