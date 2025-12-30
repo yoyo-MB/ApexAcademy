@@ -5,11 +5,13 @@
 <div class="header-btm-area">
     <div class="container">
         <div class="main-menu-wrap">
-
             <div class="site-logo">
                 <a href="{{ route('home') }}">
                     <img src="{{ asset('assets/images/logoG.png') }}" alt="logo">
                 </a>
+            </div>
+            <div class="admin-portal-btn">
+                <a href="{{ route('login') }}" class="admin-btn">Admin Portal</a>
             </div>
      <div class="main-menu-area text-right">
             <nav class="mainmenu">

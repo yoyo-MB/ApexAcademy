@@ -110,7 +110,7 @@
             <div class="col-md-6">
                 <div class="login-left">
                     <div class="logo">
-                        <img src="{{ asset('assets/images/no_background.png') }}" alt="Apex Dental Academy" style="max-width: 120px; margin-bottom: 1rem;">
+                        <img src="{{ asset('assets/images/logoG.png') }}" alt="Apex Dental Academy" style="max-width: 120px; margin-bottom: 1rem;">
                         <h2>Apex Dental Academy</h2>
                     </div>
                     <p class="lead">Welcome back! Login to access your admin dashboard and manage courses and instructors.</p>
@@ -177,12 +177,6 @@
                             </button>
                         </div>
                     </form>
-                    
-                    <div class="text-center mt-3">
-                        <small class="text-muted">
-                            Don't have an account? <a href="{{ route('register') }}">Register here</a>
-                        </small>
-                    </div>
                 </div>
             </div>
         </div>
