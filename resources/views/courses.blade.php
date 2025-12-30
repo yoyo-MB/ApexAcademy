@@ -33,8 +33,8 @@
             </div>
         </div>
 
+        <!-- Cards Row -->
         <div class="row cards-container">
-
             @foreach ($courses as $course)
                 <div class="col-xl-4 col-lg-4 col-md-6">
                     <div class="course-card">
@@ -56,17 +56,26 @@
                                 د . {{ $course->instructor->name }}
                             </div>
 
-                            <a href="{{ route('courses.show', $course->slug) }}"
-                               class="btn btn-sm btn-primary mt-2">
-                                عرض التفاصيل
-                            </a>
-                        </div>
+                            <div class="course-enroll-btn text-center">
+                                <a href="{{ route('courses.show', $course->slug) }}"
+                                   class="btn btn-sm btn-primary mt-2">
+                                    عرض التفاصيل
+                                </a>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
             @endforeach
-
         </div>
+
+        <!-- Pagination (OUTSIDE cards row) -->
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center mt-4">
+                {{ $courses->links('vendor.pagination.bootstrap-rtl') }}
+            </div>
+        </div>
+
     </div>
     <br><br>
 </section>

@@ -74,43 +74,76 @@
 
                 </div>
             </div>
-
-            <!-- Sidebar -->
-            <div class="col-lg-4">
-                <div class="course-sidebar two">
-
-                    <div class="course-single-info course-widget">
-                        <div class="course-thumbnail">
-                            <img
-                                src="{{ $course->pictureUrl }}"
-                                class="img-fluid"
-                                alt="{{ $course->title }}"
-                            >
-                        </div>
-
-                        <br>
-                        <span class="price english-font">
-                            {{ $course->price }} د.ل
+<!-- Sidebar Card -->
+<div class="col-lg-4">
+    <div class="course-sidebar-two">
+        <div class="card">
+            <!-- Card Image -->
+            <div class="card-thumbnail">
+                <img 
+                    src="{{ $course->pictureUrl }}"
+                    class="img-fluid"
+                    alt="{{ $course->title }}"
+                >
+            </div>
+            
+            <!-- Card Body -->
+            <div class="card-body">
+                <!-- Price -->
+                <div class="price-section">
+                    <span class="price english-font">
+                        {{ $course->price }} د.ل
+                    </span>
+                </div>
+                
+                <!-- Enroll Button -->
+                <div class="enroll-btn-section">
+                    <a 
+                        href="{{ route('course_registrations.create', ['course_id' => $course->id]) }}"
+                        class="btn-enroll"
+                    >
+                        <i class="fa fa-user-plus me-2"></i>التسجيل في الدورة
+                    </a>
+                </div>
+                
+                <!-- Course Info -->
+                <div class="course-info-section">
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="fa fa-clock"></i> المدة:
                         </span>
-
-                        <div class="course-enroll-btn text-center">
-                            <a href="{{ route('contact') }}">التسجيل في الدورة</a>
-                        </div>
-
-                        <div class="course-info-list">
-                            <ul>
-                                <li>
-                                    <span><i class="fa fa-clock"></i> المدة:</span>
-                                    <span class="info float-right">
-                                        {{ $course->duration }} ساعة
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
+                        <span class="info-value">
+                            {{ $course->duration }} ساعة
+                        </span>
                     </div>
-
+                    
+                    <!-- يمكن إضافة معلومات إضافية هنا إذا كانت متوفرة -->
+                    @if($course->instructor)
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="fa fa-user"></i> المدرب:
+                        </span>
+                        <span class="info-value">
+                            {{ $course->instructor->name }}
+                        </span>
+                    </div>
+                    @endif
+                    
+                    @if($course->lessons_count)
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="fa fa-book"></i> الدروس:
+                        </span>
+                        <span class="info-value">
+                            {{ $course->lessons_count }} درس
+                        </span>
+                    </div>
+                    @endif
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
         </div>
     </div>
