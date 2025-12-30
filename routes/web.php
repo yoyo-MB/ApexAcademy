@@ -8,24 +8,31 @@ use App\Http\Controllers\authController;
 use App\Http\Controllers\homeController;
 use App\Models\Course;
 use App\Models\Instructor;
-use Illuminate\Support\Facades\Route; 
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $homeCourses = Course::latest()->take(3)->get();
-    return view('home', compact('homeCourses'));
+     $instructors = Instructor::latest()->take(3)->get();
+    return view('home', compact('instructors', 'homeCourses'));
 })->name('home');
 
 Route::view('/about', 'about')->name('about');
+
+
 Route::get('/courses', function () {
-    $courses = Course::latest()->get();
+    $courses = Course::latest()->paginate(6);
     return view('courses', compact('courses'));
 })->name('courses');
+
 
 // Public course detail page by slug
 Route::get('/courses/{slug}', function ($slug) {
     $course = Course::where('slug', $slug)->firstOrFail();
     return view('courses.show', compact('course'));
 })->name('courses.show');
+
+
+
 
 // Instructors index (public)
 Route::get('/instructors', function () {

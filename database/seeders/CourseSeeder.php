@@ -36,6 +36,16 @@ class CourseSeeder extends Seeder
         foreach ($courses as $idx => [$title, $desc]) {
             $instructorId = $instructors[$idx]->id;
 
+            // choose specific images for the first three courses
+            $picture = '/assets/images/apexdental_academy.png';
+            if ($idx === 0) {
+                $picture = '/assets/images/course1.png';
+            } elseif ($idx === 1) {
+                $picture = '/assets/images/course2.png';
+            } elseif ($idx === 2) {
+                $picture = '/assets/images/course3.png';
+            }
+
             Course::updateOrCreate(
                 ['title' => $title],
                 [
@@ -43,7 +53,7 @@ class CourseSeeder extends Seeder
                     'duration' => rand(10, 40),          
                     'price' => rand(120, 500),          
                     'instructorId' => $instructorId,
-                    'pictureUrl' => '/assets/images/apexdental_academy.png',
+                    'pictureUrl' => $picture,
                 ]
             );
         }

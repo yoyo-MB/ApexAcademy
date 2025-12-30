@@ -88,7 +88,7 @@ main {
 <aside class="sidebar">
   <!-- Logo -->
   <div class="text-center mb-4">
-    <img src="{{ asset('assets/images/no_background.png') }}" alt="Apex Dental Academy Logo" class="img-fluid" style="max-width:110px;">
+    <img src="{{ asset('assets/images/logoG.png') }}" alt="Apex Dental Academy Logo" class="img-fluid" style="max-width:110px;">
   </div>
 
   <!-- Navigation -->

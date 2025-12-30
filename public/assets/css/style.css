@@ -234,6 +234,74 @@ p {
   line-height: 26px;
   color: var(--color-gray);
 }
+/* Courses Pagination */
+.courses-pagination {
+    margin-top: 60px;
+}
+
+.pagination-list {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pagination-list li {
+    min-width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.pagination-list li a,
+.pagination-list li span {
+    color: #0d3b66; /* نفس لون العناوين */
+    text-decoration: none;
+}
+
+.pagination-list li:hover {
+    background: #0d3b66;
+}
+
+.pagination-list li:hover a {
+    color: #fff;
+}
+
+.pagination-list li.active {
+    background: #0d3b66;
+    border-color: #0d3b66;
+}
+
+.pagination-list li.active span {
+    color: #fff;
+}
+
+.pagination-list li.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pagination-list li.dots {
+    border: none;
+    background: transparent;
+}
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cards-container > [class*="col-"] {
+    width: auto;
+}
+
 
 .container {
   max-width: 1240px;
@@ -870,15 +938,169 @@ p {
     line-height: 26px;
     color: var(--color-gray);
 }
+/* Course Sidebar Card Styles */
+.course-sidebar-two {
+    position: sticky;
+    top: 20px;
+    margin-bottom: 30px;
+}
+
+.course-sidebar-two .card {
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.course-sidebar-two .card:hover {
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+}
+
+.course-sidebar-two .card-thumbnail {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+}
+
+.course-sidebar-two .card-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.course-sidebar-two .card:hover .card-thumbnail img {
+    transform: scale(1.05);
+}
+
+.course-sidebar-two .card-body {
+    padding: 1.5rem;
+}
+
+.course-sidebar-two .price-section {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.course-sidebar-two .price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    font-family: "Poppins", sans-serif;
+    display: inline-block;
+    padding: 5px 15px;
+    background: linear-gradient(135deg, rgba(24, 119, 175, 0.1) 0%, rgba(71, 138, 177, 0.1) 100%);
+    border-radius: 8px;
+}
+
+.course-sidebar-two .enroll-btn-section {
+    margin-bottom: 1.5rem;
+}
+
+.course-sidebar-two .btn-enroll {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    border: none;
+    padding: 12px 30px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    width: 100%;
+    color: var(--color-white);
+    font-size: 16px;
+    display: block;
+    text-align: center;
+}
+
+.course-sidebar-two .btn-enroll:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(24, 119, 175, 0.3);
+    color: var(--color-white);
+}
+
+.course-sidebar-two .course-info-section {
+    margin-top: 1rem;
+}
+
+.course-sidebar-two .info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.course-sidebar-two .info-item:last-child {
+    border-bottom: none;
+}
+
+.course-sidebar-two .info-label {
+    color: var(--color-secondary);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.course-sidebar-two .info-label i {
+    color: var(--color-primary);
+    margin-left: 8px;
+    font-size: 18px;
+}
+
+.course-sidebar-two .info-value {
+    color: var(--color-dark);
+    font-weight: 600;
+    font-size: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .course-sidebar-two {
+        position: static;
+        margin-bottom: 2rem;
+    }
+    
+    .course-sidebar-two .card {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .course-sidebar-two .card-thumbnail {
+        height: 160px;
+    }
+    
+    .course-sidebar-two .price {
+        font-size: 1.8rem;
+    }
+}
+
 /*-------------------------------------------------------------------------------------
     Section Heading
 ---------------------------------------------------------------------------------------*/
 
+.sec-headingA {
+  margin-bottom: 40px;
+  margin-left: 50%;
+}
 .sec-heading {
   margin-bottom: 40px;
   margin-right: 50%;
 }
 
+.sec-headingA h4 {
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  letter-spacing: 1px;
+}
 .sec-heading h4 {
   font-size: 16px;
   line-height: 26px;
@@ -887,7 +1109,11 @@ p {
   color: var(--color-primary);
   letter-spacing: 1px;
 }
-
+.sec-headingA h2 {
+  font-size: 40px;
+  line-height: 55px;
+  font-weight: 700;
+}
 .sec-heading h2 {
   font-size: 40px;
   line-height: 55px;
@@ -1134,6 +1360,7 @@ p {
 }
 
 .sec-heading h2 {
+   
     font-size: 40px;
     font-weight: 700;
     margin-bottom: 20px;
