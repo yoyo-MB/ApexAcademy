@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Registration Successful - Apex Dental Academy</title>
+    <title>تم التسجيل بنجاح - أكاديمية أبكس لطب الأسنان</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -26,6 +26,7 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--light-bg);
+            text-align: right;
         }
         
         .success-container {
@@ -102,14 +103,14 @@
         .info-list li {
             margin-bottom: 0.5rem;
             position: relative;
-            padding-left: 1.5rem;
+            padding-right: 1.5rem;
         }
         
         .info-list li:before {
             content: "•";
             color: var(--primary);
             position: absolute;
-            left: 0;
+            right: 0;
             font-weight: bold;
         }
     </style>
@@ -119,8 +120,8 @@
     <div class="header-section">
         <div class="container">
             <div class="logo">
-                <img src="{{ asset('assets/images/no_background.png') }}" alt="Apex Dental Academy">
-                <h2 class="mt-2">Apex Dental Academy</h2>
+                <img src="{{ asset('assets/images/logoG.png') }}" alt="أكاديمية أبكس لطب الأسنان">
+                <h2 class="mt-2">أكاديمية أبكس لطب الأسنان</h2>
             </div>
         </div>
     </div>
@@ -132,27 +133,27 @@
                 <div class="success-icon">
                     <i class="fas fa-check"></i>
                 </div>
-                <h1 class="display-5 fw-bold mb-4">Registration Successful!</h1>
+                <h1 class="display-5 fw-bold mb-4">تم التسجيل بنجاح!</h1>
                 <p class="lead text-muted mb-5">
-                    Thank you for registering for the course. We have received your registration and will contact you shortly with further details.
+                    شكراً لتسجيلك في الدورة. لقد استلمنا طلبك وسنتواصل معك قريباً بالتفاصيل الإضافية.
                 </p>
             </div>
 
             <div class="info-card">
-                <h3><i class="fas fa-info-circle me-2"></i>What's Next?</h3>
+                <h3><i class="fas fa-info-circle ms-2"></i>ما الخطوة التالية؟</h3>
                 <ul class="info-list">
-                    <li>You will receive a confirmation email shortly</li>
-                    <li>Our team will review your registration and contact you with course details</li>
-                    <li>Payment information and schedule will be provided via email</li>
+                    <li>ستتلقى رسالة تأكيد عبر البريد الإلكتروني قريباً</li>
+                    <li>سيقوم فريقنا بمراجعة طلبك والتواصل معك بتفاصيل الدورة</li>
+                    <li>سيتم توفير معلومات الدفع والجدول الزمني عبر البريد الإلكتروني</li>
                 </ul>
             </div>
 
             <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
                 <a href="{{ route('course_registrations.create') }}" class="btn btn-primary">
-                    <i class="fas fa-plus me-2"></i>Register Another Course
+                    <i class="fas fa-plus ms-2"></i>التسجيل في دورة أخرى
                 </a>
                 <a href="{{ route('home') }}" class="btn btn-outline-secondary">
-                    <i class="fas fa-home me-2"></i>Back to Home
+                    <i class="fas fa-home ms-2"></i>العودة للرئيسية
                 </a>
             </div>
         </div>

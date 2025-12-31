@@ -9,7 +9,7 @@
             </div>
 
             <div class="col-lg-6">
-                <div class="sec-heading">
+                <div class="sec-headingA">
                     <h4>من نحن</h4>
                     <h2>أكاديمية ايبكس لطب الأسنان</h2>
                 </div>

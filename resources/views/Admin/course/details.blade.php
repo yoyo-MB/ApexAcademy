@@ -22,7 +22,7 @@
 
 <div class="d-flex gap-3 mt-3">
 <span class="badge bg-primary">{{ $course->duration }} Hours</span>
-<span class="badge bg-success">${{ number_format($course->price,2) }}</span>
+<span class="badge bg-success">دل{{ number_format($course->price,2) }}</span>
 </div>
 </div>
 </div>

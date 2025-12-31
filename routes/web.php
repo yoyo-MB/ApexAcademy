@@ -3,28 +3,37 @@
 use App\Http\Controllers\Admin\courseController;
 use App\Http\Controllers\Admin\instructorController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\Contact_us_controller;
 use App\Http\Controllers\courseregistrationController;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\homeController;
 use App\Models\Course;
 use App\Models\Instructor;
-use Illuminate\Support\Facades\Route; 
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $homeCourses = Course::latest()->take(3)->get();
-    return view('home', compact('homeCourses'));
+     $instructors = Instructor::latest()->take(3)->get();
+    return view('home', compact('instructors', 'homeCourses'));
 })->name('home');
 
 Route::view('/about', 'about')->name('about');
+
+
 Route::get('/courses', function () {
-    $courses = Course::latest()->get();
+    $courses = Course::latest()->paginate(6);
     return view('courses', compact('courses'));
 })->name('courses');
 
-// Public course detail page (accepts slug or numeric id)
-Route::get('/courses/{course}', function (Course $course) {
+
+// Public course detail page by slug
+Route::get('/courses/{slug}', function ($slug) {
+    $course = Course::where('slug', $slug)->firstOrFail();
     return view('courses.show', compact('course'));
 })->name('courses.show');
+
+
+
 
 // Instructors index (public)
 Route::get('/instructors', function () {
@@ -36,24 +45,8 @@ Route::get('/instructors/{instructor}', function (Instructor $instructor) {
     return view('instructors.show', compact('instructor'));
 })->name('instructors.show');
 
-Route::view('/contact', 'contact')->name('contact');
-
-// Handle contact form submission
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-Route::post('contact', function (Request $request) {
-    $data = $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|max:255',
-        'subject' => 'nullable|string|max:255',
-        'message' => 'required|string',
-    ]);
-
-    // Log the message for now (or replace with Mail::send / store in DB)
-    Log::info('Contact form submitted', $data);
-
-    return redirect()->route('contact')->with('success', 'رسالتك أرسلت بنجاح. شكرا لكم!');
-})->name('contact.submit');
+Route::get('/contact', [Contact_us_controller::class, 'create'])->name('contact');
+Route::post('/contact', [Contact_us_controller::class, 'store'])->name('contact.store');
 
 
 
@@ -96,6 +89,10 @@ Route::middleware(['web', 'auth:admin'])->group(function () {
     Route::get('course-registrations', [courseregistrationController::class, 'index'])->name('course_registrations.index');
     Route::get('course-registrations/{id}', [courseregistrationController::class, 'show'])->name('course_registrations.show');
     Route::delete('course-registrations/{id}', [courseregistrationController::class, 'destroy'])->name('course_registrations.destroy');
+
+    // Contact us management routes
+    Route::get('contact-us', [Contact_us_controller::class, 'index'])->name('contact_us.index');
+    Route::get('contact-us/{id}', [Contact_us_controller::class, 'show'])->name('contact_us.show');
 });
 
 
